@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start" : "tsc && node dist/script.js",
     "start:daemon" : "tsc && pm2 start dist/script.js",
-    "start:docker" : "&& docker build . -t yogasubscriber && docker run yogasubscriber"
+    "start:docker" : "docker build . -t yogasubscriber && docker run yogasubscriber"
   },
   "keywords": [],
   "author": "",
