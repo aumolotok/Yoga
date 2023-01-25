@@ -15,7 +15,7 @@ export class Manager {
         axios.interceptors.request.use(request => {
             console.log(` `)
             console.log(`Request to ${JSON.stringify(request.url)}}`)
-            console.log(`---------------------${new Date().getDate()}.${new Date().getMonth()+1}.${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}------------------------`)
+            console.log(`---------------------${DateHelper.getDateStringForLogs()}------------------------`)
             console.log(` `)
             return request
         });

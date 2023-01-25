@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "tsc && node dist/script.js",
-    "start:daemon" : "tsc && pm2 start dist/script.js",
-    "start:docker" : "docker build . -t yogasubscriber && docker run yogasubscriber"
+    "start": "tsc && node dist/script.js",
+    "start:daemon": "tsc && pm2 start dist/script.js",
+    "start:docker": "docker build . -t yogasubscriber && docker run yogasubscriber"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^18.11.18",
     "typescript": "^4.9.4"
   },
   "dependencies": {

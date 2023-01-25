@@ -31,6 +31,11 @@ export class DateHelper {
         return [DateHelper.d(date.getDate()), DateHelper.d(date.getMonth() + 1), date.getFullYear()].join(delimiter)
     }
 
+    static getDateStringForLogs() {
+        var now = new Date();
+        return `${this.getDDMMYYYYWithDelimiter(now)} ${now.getUTCHours() + 3}:${now.getMinutes()}:${now.getSeconds()}`
+    }
+
     static d(i: number) {
         if (i < 9) {
             return "0" + i.toString();

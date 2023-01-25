@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { Logger } from './logger/Logger.js';
+import { DateHelper } from './utils/DateHelper/DateHelper.js';
 import { Manager } from './utils/Manager.js';
 import Sceduler from './utils/Sceduler.js';
 import { TokenManager } from './utils/TokenManager.js';
@@ -8,10 +10,12 @@ console.log("Start finding")
 
 const manager = new Manager();
 
-console.log(`--------- Date: ${new Date()} ---------- `)
+// Logger.writeToFile()
+
+console.log(`--------- Date: ${DateHelper.getDateStringForLogs()} ---------- `)
 manager.tryToSubscribe()
 setInterval(() => {
-    console.log(`--------- Date: ${new Date()} ---------- `)
+    console.log(`--------- Date: ${DateHelper.getDateStringForLogs()} ---------- `)
     manager.tryToSubscribe()
 }, 1000 * 60)
 
