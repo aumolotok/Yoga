@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Logger } from './logger/Logger.js';
 import { DateHelper } from './utils/DateHelper/DateHelper.js';
 import { Manager } from './utils/Manager.js';
 import Sceduler from './utils/Sceduler.js';
