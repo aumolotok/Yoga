@@ -1,4 +1,6 @@
+import {Secret} from "../secret"
+
 export const credentials = {
-    client_id: process.env["YOGA_CLIENT_ID"],
-    client_secret: process.env["YOGA_CLIENT_SECRET"]
+    client_id: Secret.login,
+    client_secret: Secret.password
 }
