@@ -33,7 +33,7 @@ export class DateHelper {
 
     static getDateStringForLogs() {
         var now = new Date();
-        return `${this.getDDMMYYYYWithDelimiter(now)} ${DateHelper.d(now.getUTCHours() + 3)}:${DateHelper.d(now.getMinutes())}:${now.getSeconds()}`
+        return `${this.getDDMMYYYYWithDelimiter(now)} ${DateHelper.d(DateHelper.h(now.getUTCHours() + 3))}:${DateHelper.d(now.getMinutes())}:${now.getSeconds()}`
     }
 
     static d(i: number) {
@@ -42,5 +42,9 @@ export class DateHelper {
         }
 
         else return i;
+    }
+
+    static h(i: number) {
+        return i % 24;
     }
 }
