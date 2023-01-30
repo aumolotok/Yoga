@@ -5,10 +5,11 @@ export class DateHelper {
     static getStartOfWeek() {
         const now  = new Date();
         // 0,1,2,3,4,5,6
+        // 0  is sunday
         let startOfWeek : Date = new Date();
 
         if(now.getDay() == 0) {
-            startOfWeek.setDate(now.getDate() - (now.getDay() - 6))
+            startOfWeek.setDate(now.getDate() - 6)
         } else {
             startOfWeek.setDate(now.getDate() - (now.getDay() - 1))
         }
@@ -19,7 +20,7 @@ export class DateHelper {
     // 1 will give next week
     static getStartDayOfFutureWeek(howManyWeekPlus: number = 1) {
         const result = this.getStartOfWeek()
-        result.setDate(result.getDate() + 7 * howManyWeekPlus )
+        result.setDate(result.getDate() + 7 * howManyWeekPlus ) 
         return result;
     }
 

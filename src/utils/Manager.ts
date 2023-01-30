@@ -29,15 +29,19 @@ export class Manager {
 
     async tryToSubscribe() {
        let targetWeeks = [ 
+        // DateHelper.getStartOfWeek(),
         DateHelper.getStartDayOfFutureWeek(),
-        DateHelper.getStartDayOfFutureWeek(2)]
+        DateHelper.getStartDayOfFutureWeek(2)
+    ]
 
         targetWeeks.forEach(date => this.tryToSubcribeOnWeek(date))
     }
 
     async tryToSubcribeOnWeek(startWeekDate: Date) {
 
-        const allWantedTrainings = this.filterTrainings( await(this.sceduler.getWeekTrainings(startWeekDate, await this.tokenManager.getContactId())))
+        const allTrainings = await(this.sceduler.getWeekTrainings(startWeekDate, await this.tokenManager.getContactId()));
+
+        const allWantedTrainings = this.filterTrainings( allTrainings)
 
         const currentBookedTrainings = await this.sceduler.getBookedTrainings(await this.tokenManager.getToken(), await  this.tokenManager.getContactId())
 
@@ -70,7 +74,6 @@ export class Manager {
             .filter(training => training.teacherName?.includes("Жихарь"))
             .filter(training => training.gptName?.includes("Баланс"))
             .filter(training => training.roomName?.includes("Пять Звезд"))
-            //.filter(training => (training.date as Date).getDay() == 1 || (training.date as Date).getDay() == 4)
             .filter(
                 training => training.weekDayName == 'Четверг' || 
                 training.weekDayName == 'Понедельник'
