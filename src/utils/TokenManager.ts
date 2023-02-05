@@ -7,16 +7,26 @@ class TokenManager extends ClientClass {
 
     private token : string = "";
     private contactId: string = "";
+    private isTokenDenanding = false;
 
     constructor(client : AxiosStatic) {
         super(client)
-        setInterval((() => {this.refresh()}).bind(this), 1000 * 60 * 15)
+    }
+
+    async init() {
         this.refresh()
+        if( this.isTokenDenanding == false){
+            console.log("here")
+            setInterval((() => {this.refresh()}).bind(this), 1000 * 60 * 15)
+            this.refresh()
+            .then(()=> this.isTokenDenanding = true)
+        }
     }
 
     async refresh() {
-        this.getTokenFromRest();
-        this.getContactIdFromRest()
+        this.getTokenFromRest()
+        .then(() => this.getContactIdFromRest())
+        .catch(error => console.log("Error in getting token :("));
     }
 
     async getToken() {
@@ -48,7 +58,7 @@ class TokenManager extends ClientClass {
         }).then( res => {
             this.token = (res.data as authRsponse).data.access_token
             console.log("New token is gotten")
-        }).catch(error => console.log(error))
+        }).catch(error => this.hanleError(error))
     }
 
     private async getContactIdFromRest() {
@@ -65,7 +75,7 @@ class TokenManager extends ClientClass {
             weekday: "",            
         })
         .then( res => this.contactId = res.data["client"]["currentContactId"])
-        .catch(error => console.log(error))
+        .catch(error => this.hanleError(error))
     }
 }
 

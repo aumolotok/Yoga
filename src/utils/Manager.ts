@@ -24,17 +24,29 @@ export class Manager {
             console.log(` `)
             console.log(`Response status ${responce.status} ${responce.statusText} from  ${responce.config.url}`)
             return responce
-        });        
+        });     
+    }
+
+    async init() {
+        await this.tokenManager.init()
+        return this;
     }
 
     async tryToSubscribe() {
+        
        let targetWeeks = [ 
         // DateHelper.getStartOfWeek(),
         DateHelper.getStartDayOfFutureWeek(),
         DateHelper.getStartDayOfFutureWeek(2)
     ]
 
-        targetWeeks.forEach(date => this.tryToSubcribeOnWeek(date))
+
+        targetWeeks.forEach(date => {
+            this.tryToSubcribeOnWeek(date)
+            .catch((error : Error) => console.log("Error in subscribtion :(" + error.message))
+        })
+        
+
     }
 
     async tryToSubcribeOnWeek(startWeekDate: Date) {

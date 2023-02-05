@@ -24,7 +24,7 @@ export default class Sceduler extends ClientClass {
         .then( res => {
             scedule = res.data as SceduleResponse
         })
-        .catch( error => console.log(" Error via get Scedule" + error))
+        .catch( error => this.hanleError(error))
         
         return scedule;
     }
@@ -48,6 +48,7 @@ export default class Sceduler extends ClientClass {
                 }
             }
         })
+        .catch(error => this.hanleError(error))
 
         return allWeekTrainings;
     }
@@ -71,7 +72,9 @@ export default class Sceduler extends ClientClass {
             currentContactId: `${contactId}`,
             viewer_id: "",
             eventId: `${eventId}`
-        }).then
+        })
+        .then(()=> console.log("Try to subscribe"))
+        .catch(error => this.hanleError(error))
 
         console.log(`event with id ${eventId} was booked`)
     }

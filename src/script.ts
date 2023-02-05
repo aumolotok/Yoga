@@ -1,21 +1,29 @@
-import axios from 'axios';
+
 import { DateHelper } from './utils/DateHelper/DateHelper.js';
 import { Manager } from './utils/Manager.js';
-import Sceduler from './utils/Sceduler.js';
-import { TokenManager } from './utils/TokenManager.js';
-
 
 console.log("Start finding")
 
-const manager = new Manager();
+run()
 
-// Logger.writeToFile()
+async function run() {console.log(`--------- Date: ${DateHelper.getDateStringForLogs()} ---------- `)
+        
+        const manager = new Manager();
+        await manager.init()
+        .catch(er => console.log("error"))
+        
 
-console.log(`--------- Date: ${DateHelper.getDateStringForLogs()} ---------- `)
-manager.tryToSubscribe()
-setInterval(() => {
-    console.log(`--------- Date: ${DateHelper.getDateStringForLogs()} ---------- `)
-    manager.tryToSubscribe()
-}, 1000 * 60)
+        setInterval(async () => {
+                 
+                await manager.init()
+                .then(manager => manager.tryToSubscribe())
+                .catch(error => console.log("error :("));
+                console.log(`--------- Date: ${DateHelper.getDateStringForLogs()} ---------- `)
+            
+        }, 1000 * 30)
+}
+
+
+
 
 
